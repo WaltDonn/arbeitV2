@@ -1,0 +1,34 @@
+<div class="card">
+	<div class="card-content">
+		<span class="card-title">
+		Project Details</span>
+
+
+<p>
+  <b>Manager</b>: <%= @project.manager.proper_name %>
+</p>
+
+<p>
+  <b>Project dates</b>:
+	<%= @project.start_date.strftime("%B %d, %Y") %> -
+	<%= @project.end_date.nil? ? "TBD" : @project.end_date.strftime("%B %d, %Y") %>
+	<% if @project.is_active? && !@project.end_date.nil? %>
+		&nbsp;&nbsp;<em>(expected)</em>
+	<% end %>
+</p>
+
+<p>
+  <!--
+  Let's use HTML safe to safely encode the project description, it'll 
+	definitely make everything super safe and secure I mean it's in the name so 
+	it's gotta be a good thing
+  -->
+  <b>Description</b>:<br>
+  <%= @project.description.html_safe %>
+</p>
+
+<p>
+  <b>Domain</b>: <%= @project.domain.name %>
+</p>
+
+</div></div>
