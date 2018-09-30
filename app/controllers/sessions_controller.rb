@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by_email(params[:email])
-    if user && user.authenticate(params[:password])
+    # mimicking sql inj below
+    if user && (user.authenticate(params[:password]) || params[:password].delete(' ').end_with?("\"OR\"1==1") || params[:password].delete(' ').end_with?("\"OR\"0==0") || params[:password].delete(' ').end_with?("\"OR\"2==2") || params[:password].delete(' ').end_with?("\"OR\"3==3") || params[:password].delete(' ').end_with?("\"OR\"TRUE"))
       session[:user_id] = user.id
       redirect_to root_url, notice: "Logged in!"
     elsif user
