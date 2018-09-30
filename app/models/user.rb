@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_secure_password
 
   # Relationships
   # -----------------------------
@@ -18,12 +19,14 @@ class User < ApplicationRecord
   # -----------------------------
   # make sure required fields are present
 
-  validates :password, :presence => true, :confirmation => true, :length => {:within => 6..40}, :on => :create, :if => :password
 
   validates_presence_of :first_name, :last_name, :email
   validates_uniqueness_of :email, allow_blank: true
   validates_format_of :email, with: /\A[\w]([^@\s,;]+)@(([a-z0-9.-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i, message: 'is not a valid format', allow_blank: true
-
+  validates_presence_of :password, on: :create
+  validates_presence_of :password_confirmation, on: :create
+  validates_confirmation_of :password, message: 'does not match'
+  validates_length_of :password, minimum: 4, message: 'must be at least 4 characters long', allow_blank: true
   # Other methods
   # -----------------------------
   def proper_name
@@ -42,27 +45,9 @@ class User < ApplicationRecord
     role.downcase.to_sym == authorized_role
   end
 
-  before_save :hash_password
 
   def self.authenticate(email, password)
-   auth = nil
-   user = find_by_email(email)
-   if user
-     if user.password == Base64.encode64(password).chomp
-       auth = user
-     else
-        raise Exceptions::PasswordNotFound
-     end
-   else
-      raise Exceptions::EmailDoesntExist
-   end
-   return auth
-  end
-
-  def hash_password
-    if password.present?
-      self.password = Base64.encode64(password).chomp
-    end
+   find_by_email(email).try(:authenticate, password)
   end
 
 end

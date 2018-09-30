@@ -17,17 +17,6 @@ class ApplicationController < ActionController::Base
     render template: 'errors/not_found'
   end
 
-  rescue_from Exceptions::PasswordNotFound do |exception|
-    flash[:error] = "Password does not match records."
-    redirect_to login_path
-  end
-
-  rescue_from Exceptions::EmailDoesntExist do |exception|
-    flash[:error] = "Email does not belong to a user in the system."
-    redirect_to login_path
-  end
-
-
   private
   # Handling authentication
   def current_user
