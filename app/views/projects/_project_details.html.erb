@@ -24,7 +24,7 @@
 	it's gotta be a good thing
   -->
   <b>Description</b>:<br>
-  <%= sanitize @project.description.html_safe %>
+  <%= raw sanitize(@project.description) %>
 </p>
 
 <p>
