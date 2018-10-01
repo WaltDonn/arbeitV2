@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @query = filter_search(params[:query])
+    @query = params[:query]
     @results = User.search(@query)
     @total_hits = @results.size
   end
