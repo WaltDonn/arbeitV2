@@ -8,7 +8,7 @@ class CreateTasks < ActiveRecord::Migration[5.1]
       t.integer :created_by
       t.boolean :completed
       t.integer :completed_by
-      t.integer :priority
+      t.string :priority
 
       t.timestamps
     end

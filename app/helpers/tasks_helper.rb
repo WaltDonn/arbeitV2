@@ -1,20 +1,15 @@
 module TasksHelper
   def get_priority_class(code)
-    if code.to_i == 1
+    if code == "High"
       "high_priority"
-    elsif code.to_i == 2
+    elsif code == "Med"
       "med_priority"
     else "low_priority"
     end
   end
   
   def get_priority_name(code)
-    if code.to_i == 1
-      "High"
-    elsif code.to_i == 2
-      "Med"
-    else "Low"
-    end
+    code
   end
   
   def get_task_status(status)

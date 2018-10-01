@@ -10,7 +10,7 @@ class Task < ApplicationRecord
   delegate :proper_name, to: :creator, prefix: true
   delegate :proper_name, to: :completer, prefix: true
 
-  PRIORITY_LIST = [ ["High", 1], ["Med", 2], ["Low", 3], ["Who cares?", 4] ]
+  # PRIORITY_LIST = [ ["High", 1], ["Med", 2], ["Low", 3], ["Who cares?", 4] ]
 
   # Named scopes
   scope :chronological, -> { order("due_on") }
@@ -32,7 +32,7 @@ class Task < ApplicationRecord
 
   # Validations
   validates_presence_of :name
-  validates_inclusion_of :priority, in: [1,2,3,4], message: "is not included in the list of allowed priority levels"
+  # validates_inclusion_of :priority, in: [1,2,3,4], message: "is not included in the list of allowed priority levels"
   validates_datetime :due_on, on: :update
 
   # Callback

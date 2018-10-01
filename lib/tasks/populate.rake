@@ -111,7 +111,7 @@ namespace :db do
       task = Task.new
       task.name = tasks.sample
       task.project_id = project_ids.sample
-      task.priority = (1..3).to_a.sample    # no task is a 4 (the 'who cares?' priority)
+      task.priority = "Med"   
       due = (-42..42).to_a.sample
       task.due_string = due.days.ago.to_s  # a 'negative' days ago is in the future
       assigned_users = Assignment.for_project(task.project_id).map{|a| a.user_id}

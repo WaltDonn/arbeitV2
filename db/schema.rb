@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20180603003749) do
     t.integer "created_by"
     t.boolean "completed"
     t.integer "completed_by"
-    t.integer "priority"
+    t.string "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
