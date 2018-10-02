@@ -3,3 +3,5 @@
 require_relative 'config/environment'
 
 run Rails.application
+
+# Great job! Flag{KAUSR0WCANML4YF}
